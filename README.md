@@ -1,6 +1,6 @@
 # Grade Calculator Console Application
 
-A simple Kotlin-based console application designed to calculate student grades based on multiple score inputs. This project is integrated into an Android project structure and can be run directly from the terminal using Gradle.
+A simple Kotlin-based console application designed to calculate student grades based on multiple score inputs. This project is integrated into an Android project structure and can be run directly from the terminal using Gradle
 
 ## Features
 
