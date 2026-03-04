@@ -1,0 +1,80 @@
+name: Release Flutter APK
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag (example: v1.0.0)"
+        required: true
+        default: "v1.0.0"
+      release_name:
+        description: "Release title"
+        required: false
+        default: "Flutter GPA Calculator Release"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Resolve release metadata
+        id: meta
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            TAG="${GITHUB_REF_NAME}"
+            NAME="Release ${GITHUB_REF_NAME}"
+          else
+            TAG="${{ inputs.release_tag }}"
+            NAME="${{ inputs.release_name }}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter pub get
+
+      - name: Run tests
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter test
+
+      - name: Build release APK
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter build apk --release
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk
+          path: dart/flutter_gpa_calculator/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Create GitHub release and upload APK
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.meta.outputs.tag }}
+          name: ${{ steps.meta.outputs.name }}
+          generateReleaseNotes: true
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: dart/flutter_gpa_calculator/build/app/outputs/flutter-apk/app-release.apk
