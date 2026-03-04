@@ -1,17 +1,41 @@
-# gpa_calculator_flutter
+# GPA Calculator Monorepo
 
-A new Flutter project.
+This repository is organized into separate Kotlin and Dart projects.
 
-## Getting Started
+## Repository Structure
 
-This project is a starting point for a Flutter application.
+- `kotlin/`
+  - `grade_calculator_kotlin/` : Kotlin/Gradle grade calculator console project
+- `dart/`
+  - `flutter_gpa_calculator/` : Flutter app
+  - `console_gpa_calculator/` : Dart console GPA calculator (manual + CSV import/export)
 
-A few resources to get you started if this is your first Flutter project:
+## Quick Start
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### Dart console app
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```powershell
+cd "dart/console_gpa_calculator"
+dart run
+```
+
+### Flutter app
+
+```powershell
+cd "dart/flutter_gpa_calculator"
+flutter run
+```
+
+### Kotlin app (Gradle)
+
+```powershell
+cd "kotlin/grade_calculator_kotlin"
+.\gradlew.bat :app:runKotlin --console=plain
+```
+
+## Notes
+
+- Each section has its own README:
+  - `dart/README.md`
+  - `kotlin/README.md`
+- Each project also contains its own project-level README.
