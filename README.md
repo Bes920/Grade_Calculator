@@ -1,66 +1,41 @@
-# Grade Calculator 
+# GPA Calculator Monorepo
 
-This repository is a collection of various grade calculator projects developed in different languages and environments. It is structured to keep multiple independent projects organized within a single repository.
+This repository is organized into separate Kotlin and Dart projects.
 
 ## Repository Structure
 
-The repository is organized into the following subfolders:
+- `kotlin/`
+  - `grade_calculator_kotlin/`: Kotlin/Gradle grade calculator console project
+- `dart/`
+  - `flutter_gpa_calculator/`: Flutter app
+  - `console_gpa_calculator/`: Dart console GPA calculator (manual + CSV import/export)
 
-*   **`kotlin_calculator/`**: An enhanced Android/Kotlin console application with CSV import/export features.
-*   **`dart_calculator/`**: A simple Dart console application for grade calculation.
+## Quick Start
 
----
+### Dart console app
 
-## 1. Kotlin Calculator (`kotlin_calculator/`)
+```powershell
+cd "dart/console_gpa_calculator"
+dart run
+```
 
-A powerful Kotlin-based console application. It uses a `Student` data class to encapsulate data and logic, providing a clean object-oriented design.
+### Flutter app
 
-### Features
-*   **Interactive Menu:** Choose between manual entry and CSV file processing.
-*   **CSV Import/Export:** Batch process grades from files and save detailed reports.
-*   **Input Validation:** Robust handling of non-numeric and negative inputs.
+```powershell
+cd "dart/flutter_gpa_calculator"
+flutter run
+```
 
-### How to Run (Kotlin)
-1.  Navigate to the `kotlin_calculator` directory:
-    ```bash
-    cd kotlin_calculator
-    ```
-2.  Run the application using the Gradle wrapper:
-    ```bash
-    ./gradlew :app:runKotlin --console=plain
-    ```
-    *(Note: The `--console=plain` flag is required for proper interactive input).*
+### Kotlin app (Gradle)
 
----
+```powershell
+cd "kotlin/grade_calculator_kotlin"
+.\gradlew.bat :app:runKotlin --console=plain
+```
 
-## 2. Dart Calculator (`dart_calculator/`)
+## Notes
 
-A straightforward Dart implementation of the grade calculator logic.
-
-### How to Run (Dart)
-1.  Navigate to the `dart_calculator` directory:
-    ```bash
-    cd dart_calculator
-    ```
-2.  Run the application using the Dart VM:
-    ```bash
-    dart main.dart
-    ```
-
----
-
-## Shared Grading Logic
-
-Both applications use the following grading scale:
-
-| Average Score | Grade | Status |
-| :--- | :--- | :--- |
-| 90.0 - 100.0 | A | Pass |
-| 80.0 - 89.9 | B | Pass |
-| 70.0 - 79.9 | C | Pass |
-| 60.0 - 69.9 | D | Pass |
-| Below 60.0 | F | Fail |
-
-## Repository Information
-
-*   **Remote URL:** `git@github.com:Bes920/Grade_Calculator.git`
+- Each section has its own README:
+  - `dart/README.md`
+  - `kotlin/README.md`
+- Each project also contains its own project-level README.

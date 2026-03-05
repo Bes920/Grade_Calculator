@@ -1,0 +1,135 @@
+name: Release Flutter Mobile
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag (example: v1.0.0)"
+        required: true
+        default: "v1.0.0"
+      release_name:
+        description: "Release title"
+        required: false
+        default: "Flutter GPA Calculator Release"
+
+permissions:
+  contents: write
+
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      name: ${{ steps.meta.outputs.name }}
+    steps:
+      - name: Resolve release metadata
+        id: meta
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            TAG="${GITHUB_REF_NAME}"
+            NAME="Release ${GITHUB_REF_NAME}"
+          else
+            TAG="${{ inputs.release_tag }}"
+            NAME="${{ inputs.release_name }}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter pub get
+
+      - name: Run tests
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter test
+
+      - name: Build release APK
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter build apk --release
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: dart/flutter_gpa_calculator/build/app/outputs/flutter-apk/app-release.apk
+
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter pub get
+
+      - name: Build iOS app (no codesign)
+        working-directory: dart/flutter_gpa_calculator
+        run: flutter build ios --release --no-codesign
+
+      - name: Package iOS app bundle
+        shell: bash
+        run: |
+          cd dart/flutter_gpa_calculator/build/ios/iphoneos
+          ditto -c -k --sequesterRsrc --keepParent Runner.app Runner.app.zip
+
+      - name: Upload iOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-ios-app
+          path: dart/flutter_gpa_calculator/build/ios/iphoneos/Runner.app.zip
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [metadata, build-android, build-ios]
+
+    steps:
+      - name: Download APK artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-apk
+          path: release-assets
+
+      - name: Download iOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-ios-app
+          path: release-assets
+
+      - name: Create GitHub release and upload assets
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ needs.metadata.outputs.tag }}
+          name: ${{ needs.metadata.outputs.name }}
+          generateReleaseNotes: true
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: release-assets/app-release.apk,release-assets/Runner.app.zip

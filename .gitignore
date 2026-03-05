@@ -1,15 +1,24 @@
+# IDE
+.idea/
+**/.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# macOS
 .DS_Store
-/build
+
+# Dart / Flutter
+**/.dart_tool/
+**/.packages
+**/build/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+
+# Android / Kotlin / Gradle
+**/.gradle/
+**/local.properties
+/.externalNativeBuild
+/.cxx
 /captures
-.externalNativeBuild
-.cxx
-local.properties
+
+# Local metadata from imported external repo
+kotlin/grade_calculator_kotlin/.git_repo_meta/
