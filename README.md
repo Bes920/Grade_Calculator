@@ -1,4 +1,4 @@
-# Grade Calculator Monorepo
+# Grade Calculator 
 
 This repository is a collection of various grade calculator projects developed in different languages and environments. It is structured to keep multiple independent projects organized within a single repository.
 
