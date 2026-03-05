@@ -1,66 +1,57 @@
-# Grade Calculator Console Application
+# Grade Calculator Monorepo
 
-A simple but powerful Kotlin-based console application to calculate student grades. It is integrated into an Android project structure and can be run directly from the terminal using Gradle.
+This repository is a collection of various grade calculator projects developed in different languages and environments. It is structured to keep multiple independent projects organized within a single repository.
 
-This enhanced version supports both manual grade entry and batch processing through CSV file import/export.
+## Repository Structure
 
-## Features
+The repository is organized into the following subfolders:
 
-*   **Object-Oriented Design:** Uses a `Student` data class to cleanly encapsulate all student-related data and logic.
-*   **Interactive Menu:** A user-friendly menu to choose between manual input and CSV import.
-*   **Manual Entry:** Prompts for a student's name and multiple scores.
-*   **CSV Import:** Batch process multiple students by importing data from a `.csv` file.
-*   **CSV Export:** Save a detailed grade report for one or more students to a `.csv` file.
-*   **Input Validation:** Gracefully handles invalid, non-numeric, and negative inputs.
-*   **Automatic Calculation:** Calculates the average score, assigns a letter grade (A-F), and determines the pass/fail status.
+*   **`kotlin_calculator/`**: An enhanced Android/Kotlin console application with CSV import/export features.
+*   **`dart_calculator/`**: A simple Dart console application for grade calculation.
 
-## How to Run
+---
 
-1.  Open your terminal in the project root directory.
-2.  Execute the following command:
+## 1. Kotlin Calculator (`kotlin_calculator/`)
 
-```bash
-./gradlew :app:runKotlin --console=plain
-```
+A powerful Kotlin-based console application. It uses a `Student` data class to encapsulate data and logic, providing a clean object-oriented design.
 
-3.  Once the application starts, you will see the main menu. Follow the on-screen prompts.
+### Features
+*   **Interactive Menu:** Choose between manual entry and CSV file processing.
+*   **CSV Import/Export:** Batch process grades from files and save detailed reports.
+*   **Input Validation:** Robust handling of non-numeric and negative inputs.
 
-> **Note:** The `--console=plain` flag is required to disable Gradle's rich output, allowing the application to correctly capture your keyboard input.
+### How to Run (Kotlin)
+1.  Navigate to the `kotlin_calculator` directory:
+    ```bash
+    cd kotlin_calculator
+    ```
+2.  Run the application using the Gradle wrapper:
+    ```bash
+    ./gradlew :app:runKotlin --console=plain
+    ```
+    *(Note: The `--console=plain` flag is required for proper interactive input).*
 
-## Using the Import/Export Features
+---
 
-### CSV Import Format
+## 2. Dart Calculator (`dart_calculator/`)
 
-To import grades, create a `.csv` file where each line represents one student. The format must be:
+A straightforward Dart implementation of the grade calculator logic.
 
-`Student Name,Score1,Score2,Score3,...`
+### How to Run (Dart)
+1.  Navigate to the `dart_calculator` directory:
+    ```bash
+    cd dart_calculator
+    ```
+2.  Run the application using the Dart VM:
+    ```bash
+    dart main.dart
+    ```
 
-**Example (`grades-to-import.csv`):**
-```csv
-Alice Smith,92,88,95
-Bob Johnson,78,65,72
-Charlie Brown,55,61,58
-```
+---
 
-When prompted, provide the **full, absolute path** to this file.
+## Shared Grading Logic
 
-### CSV Export Format
-
-After processing, you can export the results. The generated file will contain a header and detailed information for each student:
-
-`Name,Average Score,Grade,Status,Scores...`
-
-**Example (`grades-report.csv`):**
-```csv
-Name,Average Score,Grade,Status,Scores...
-Alice Smith,91.67,A,Pass,92.0,88.0,95.0
-Bob Johnson,71.67,C,Pass,78.0,65.0,72.0
-Charlie Brown,58.00,F,Fail,55.0,61.0,58.0
-```
-
-When prompted, provide a **full, absolute path and filename** for the export file (e.g., `/path/to/your/folder/report.csv`).
-
-## Grading Logic
+Both applications use the following grading scale:
 
 | Average Score | Grade | Status |
 | :--- | :--- | :--- |
