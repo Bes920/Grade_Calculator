@@ -11,6 +11,8 @@ This directory contains a set of Kotlin exercises to practice fundamental concep
   ```bash
   ./kotlin_calculator/gradlew :exercies:runExercise1
   ```
+- **Execution:**
+  ![Exercise 1 Execution](kot_pic_run/ex1.png)
 
 ### Exercise 2: Map and Collection Operations
 - **File:** `Exercise2.kt`
@@ -19,6 +21,8 @@ This directory contains a set of Kotlin exercises to practice fundamental concep
   ```bash
   ./kotlin_calculator/gradlew :exercies:runExercise2
   ```
+- **Execution:**
+  ![Exercise 2 Execution](kot_pic_run/ex2.png)
 
 ### Exercise 3: Data Classes and Aggregation
 - **File:** `Exercise3.kt`
@@ -27,6 +31,8 @@ This directory contains a set of Kotlin exercises to practice fundamental concep
   ```bash
   ./kotlin_calculator/gradlew :exercies:runExercise3
   ```
+- **Execution:**
+  ![Exercise 3 Execution](kot_pic_run/ex3.png)
 
 ---
 
