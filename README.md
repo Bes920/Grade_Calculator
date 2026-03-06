@@ -1,5 +1,17 @@
 # GPA Calculator Monorepo
 
+## UI Preview
+
+Beautiful modern UI (Dart/Flutter):
+
+![Dart UI Empty](docs/screenshots/dart_ui_empty.jpg)
+![Dart UI Filled](docs/screenshots/dart_ui_filled.jpg)
+
+Simpler UI (Kotlin):
+
+![Kotlin UI Empty](docs/screenshots/kotlin_ui_empty.jpg)
+![Kotlin UI Filled](docs/screenshots/kotlin_ui_filled.jpg)
+
 This repository is organized into separate Kotlin and Dart projects.
 
 ## Repository Structure

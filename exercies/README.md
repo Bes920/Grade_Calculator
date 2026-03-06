@@ -1,6 +1,6 @@
-# Kotlin Exercises
+# Exercises
 
-This directory contains a set of Kotlin exercises to practice fundamental concepts like collections, lambdas, and data classes.
+This directory contains Dart OOP exercises.
 
 ## Exercises
 
