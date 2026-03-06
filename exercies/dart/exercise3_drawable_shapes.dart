@@ -11,10 +11,39 @@ class Circle implements Drawable {
 
   @override
   void draw() {
-    print('Circle(radius: $radius)');
+    print('Circle (radius: $radius)');
+    print('   ***   ');
+    print(' *     * ');
+    print('*       *');
+    print(' *     * ');
+    print('   ***   ');
+  }
+}
+
+class Square implements Drawable {
+  Square({required this.side});
+
+  final int side;
+
+  @override
+  void draw() {
+    print('Square (side: $side)');
+    print('+-------+');
+    print('|       |');
+    print('|       |');
+    print('|       |');
+    print('+-------+');
   }
 }
 
 void main() {
-  print('Exercise 3 interface setup complete.');
+  final shapes = <Drawable>[
+    Circle(radius: 4),
+    Square(side: 7),
+  ];
+
+  for (final shape in shapes) {
+    shape.draw();
+    print('');
+  }
 }
