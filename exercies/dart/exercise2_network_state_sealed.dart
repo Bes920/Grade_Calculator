@@ -20,6 +20,25 @@ final class Error extends NetworkState {
   final String message;
 }
 
+void handleState(NetworkState state) {
+  switch (state) {
+    case Loading():
+      print('Loading...');
+    case Success(data: final data):
+      print('Success: $data');
+    case Error(message: final message):
+      print('Error: $message');
+  }
+}
+
 void main() {
-  print('Exercise 2 state model ready.');
+  final states = <NetworkState>[
+    const Loading(),
+    const Success('User data loaded'),
+    const Error('Server timeout'),
+  ];
+
+  for (final state in states) {
+    handleState(state);
+  }
 }
