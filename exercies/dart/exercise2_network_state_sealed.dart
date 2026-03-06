@@ -31,7 +31,7 @@ void handleState(NetworkState state) {
   }
 }
 
-void main() {
+void runExercise2() {
   final states = <NetworkState>[
     const Loading(),
     const Success('User data loaded'),
@@ -42,3 +42,5 @@ void main() {
     handleState(state);
   }
 }
+
+void main() => runExercise2();

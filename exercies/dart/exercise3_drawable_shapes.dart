@@ -36,7 +36,7 @@ class Square implements Drawable {
   }
 }
 
-void main() {
+void runExercise3() {
   final shapes = <Drawable>[
     Circle(radius: 4),
     Square(side: 7),
@@ -47,3 +47,5 @@ void main() {
     print('');
   }
 }
+
+void main() => runExercise3();

@@ -23,7 +23,7 @@ class Cat extends Animal {
   String makeSound() => 'Meow!';
 }
 
-void main() {
+void runExercise1() {
   final animals = <Animal>[
     Dog('Buddy'),
     Cat('Whiskers'),
@@ -35,3 +35,5 @@ void main() {
     print('${animal.name} (${animal.legs} legs) says ${animal.makeSound()}');
   }
 }
+
+void main() => runExercise1();
