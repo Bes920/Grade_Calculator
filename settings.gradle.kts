@@ -25,3 +25,4 @@ dependencyResolutionManagement {
 rootProject.name = "GradeCalculatorConsole"
 include(":app")
 project(":app").projectDir = file("kotlin_calculator/app")
+include(":exercies")
